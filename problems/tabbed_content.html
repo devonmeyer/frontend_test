@@ -17,7 +17,46 @@
 			border: 1px solid #CCCCCC;
 			vertical-align:middle; margin-bottom: 3px;
 		}
+		.tab {
+			display:inline-block;
+			padding:4px;
+			margin:2px;
+			background:rgba(255,255,255,0.05);
+			border:1px solid white;
+			cursor:pointer;
+			margin-bottom:-1px;
+			margin-left:0px;
+		}
+		#text {
+			border: 1px solid white;
+			padding:5px;
+			box-shadow:3px 3px 4px rgba(255, 255, 255, 0.2);
+
+		}
 	</style>
+	<script type='text/javascript'>
+		function toggle(tabNum){
+			texts = document.getElementsByClassName('content-text');
+			for(i = 0; i < texts.length; i++){
+				if (texts[i].getAttribute('tab') == tabNum){
+					texts[i].removeAttribute('hidden');
+				}
+				else if(!texts[i].hasAttribute('hidden')){
+					texts[i].setAttribute("hidden");
+				}
+			}
+			tabs = document.getElementsByClassName('tab');
+			for(i = 0; i < tabs.length; i++){
+				if (texts[i].getAttribute('tab') == tabNum){
+					tabs[i].style.background = "#444";					
+				}
+				else {
+					tabs[i].style.background = "";
+				}
+			}
+		}
+
+	</script>
 </head>
 <body>	
 	<div id="headwrap">
@@ -41,21 +80,35 @@
 
 		<div id="container">
 			Turn this content into a tabbed container.
+			<div id='tabs'>
+				<div class='tab' style='background:#444;' tab=1 onclick='toggle(1)'>
+					Tab 1
+				</div>
+				<div class='tab' tab=2 onclick='toggle(2)'>
+					Tab 2
+				</div>
+				<div class='tab' tab=3 onclick='toggle(3)'>
+					Tab 3
+				</div>
+			</div>
+			<div id='text'>
+				<div class='content-text' tab=1>
+					<p>
+						Gingerbread muffin gummies gingerbread macaroon. Lollipop candy applicake toffee faworki. Bear claw topping jelly toffee toffee powder tiramisu candy chupa chups. Chupa chups dragee icing applicake chupa chups dessert. Croissant jelly faworki marzipan tootsie roll marshmallow. Marshmallow toffee sweet roll fruitcake.
+					</p>
 
-			<h3>Tab 1</h3>
-			<p>
-				Gingerbread muffin gummies gingerbread macaroon. Lollipop candy applicake toffee faworki. Bear claw topping jelly toffee toffee powder tiramisu candy chupa chups. Chupa chups dragee icing applicake chupa chups dessert. Croissant jelly faworki marzipan tootsie roll marshmallow. Marshmallow toffee sweet roll fruitcake.
-			</p>
-
-			<h3>Tab 2</h3>
-			<p>
-				Chocolate faworki croissant brownie halvah macaroon gummi bears wypas. Chupa chups icing gummies pudding dessert carrot cake. Cupcake jelly beans sweet roll icing ice cream apple pie tootsie roll gummi bears marzipan. Brownie gummies chupa chups pie. Cupcake jujubes topping. 
-			</p>
-
-			<h3>Tab 3</h3>
-			<p>
-				Cheesecake jelly beans ice cream lollipop sweet pastry. Chupa chups dessert cheesecake sesame snaps. Cookie ice cream candy canes pastry cake muffin. Icing chocolate sweet gummi bears powder oat cake oat cake lemon drops.
-			</p>
+				</div>
+				<div class='content-text' tab=2 hidden>
+					<p>
+						Chocolate faworki croissant brownie halvah macaroon gummi bears wypas. Chupa chups icing gummies pudding dessert carrot cake. Cupcake jelly beans sweet roll icing ice cream apple pie tootsie roll gummi bears marzipan. Brownie gummies chupa chups pie. Cupcake jujubes topping. 
+					</p>
+				</div>
+				<div class='content-text' tab=3 hidden>
+					<p>
+						Cheesecake jelly beans ice cream lollipop sweet pastry. Chupa chups dessert cheesecake sesame snaps. Cookie ice cream candy canes pastry cake muffin. Icing chocolate sweet gummi bears powder oat cake oat cake lemon drops.
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

@@ -5,15 +5,88 @@
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
 	<style type="text/css">
 		#rotator {
+			position:relative;
 			width: 450px;
-			height: 300px;
-			border: 1px solid black;
-			background: #aaa;
+			height: 320px;
 			text-align: center;
+			background:rgba(255,255,255,0.02);
+			background-repeat: no-repeat;
+			background-image: url('../img/kat_1.jpg');
+			box-shadow:1px 1px 3px rgba(255, 255, 255, 0.2);
+		}
+		#rotator-text{
+			position:absolute;
+			bottom:0;
+			text-align:center;
+			width:80%;
+			padding-left:10%;
+			padding-right:10%;
+			padding-bottom:15px;
+			padding-top:5px;
+			border-top:1px solid #111;
+		}
+		#rotator-title h3{
+			text-align:left;
+			padding-left: 12px;
+			padding-top:12px;
+			letter-spacing: 0.05em;
 		}
 	</style>
+	<script type='text/javascript'>
+		var a = 0;
+		var kats = ["kat_1", "kat_2", "kat_3", "kat_4"]
+		var strs = [
+		"Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.",
+		"Cheesecake marzipan cupcake biscuit candy canes pudding.",
+		"Applicake topping halvah lemon drops wypas cotton candy.",
+		"Oat cake macaroon souffle cupcake chupa chups chocolate bar bear claw dragee lemon drops."
+		]
+		var titles = [
+			"<h3>Katarina</h3>",
+			"<h3>Red Card Katarina</h3>",
+			"<h3>Kitty Cat Katarina</h3>",
+			"<h3>High Command Katarina</h3>"
+		]
+		function myFunc(){
+			setInterval(rotate, 3000);
+		}
+		function rotate(){
+			a += 1;
+			a = a % 4;
+			doFade();			
+		}
+
+		function doFade(){
+			elem = document.getElementById('rotator');
+			op = window.getComputedStyle(elem).opacity;
+			new_op = Math.round(10*op - 1)/10;
+			if (new_op > 0){
+				elem.style.opacity = new_op;
+				setTimeout(doFade, 30)
+			} else {
+				elem.setAttribute("style", "background-image: url('../img/"+kats[a]+".jpg');");
+				elem.style.opacity = 0;
+				document.getElementById('rotator-text').innerHTML = strs[a];
+				document.getElementById('rotator-title').innerHTML = titles[a];
+				fadeIn();
+
+			}
+		}
+		function fadeIn(){
+			elem = document.getElementById('rotator');
+			op = window.getComputedStyle(elem).opacity;
+			new_op = Math.round(10*op + 1)/10;
+			if (new_op < 1){
+				elem.style.opacity = new_op;
+				setTimeout(fadeIn, 30);
+			} else {
+				elem.style.opacity = 1;
+			}
+		}
+
+	</script>
 </head>
-<body>
+<body onload='myFunc()'>
 	<div id="headwrap">
 	<div class="head">
 		<div class="logo">Riot Games</div>
@@ -31,7 +104,7 @@
 	</p>
 
 	<hr />
-
+	<!---
 	<h4>Katarina</h4>
 	<p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p>
 	<img src="../img/kat_1.jpg" /><br/>
@@ -49,9 +122,11 @@
 	<img src="../img/kat_4.jpg" /><br/>
 
 	<hr/>
-
+	
+	-->
 	<div id="rotator">
-		Rotator Here
+		<div id='rotator-title'><h3>Katarina</h3></div>
+		<div id='rotator-text'>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</div>
 	</div>
 </div>
 
